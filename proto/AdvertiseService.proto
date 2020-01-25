@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package AdvertiseService;
+
+import   "google/api/timestamp.proto";
+import   "google/api/annotations.proto";
+import "google/api/duration.proto";
+
+service AdvertiseService{
+    //Schedular CRUD
+    rpc CreateAdvertise(Advertise) returns (Advertise){
+        option (google.api.http) = {
+                post:"/advertise/createAdvertise"
+                body: "*"
+        };
+    }
+
+    rpc GetAdvertise(GetAdd) returns (stream Advertise){
+        option (google.api.http) = {
+                post:"/advertise/getAdvertise"
+                body: "*"
+        };
+    }
+
+    rpc UpdateAdvertise(Advertise) returns (Advertise){
+        option (google.api.http) = {
+                post:"/advertise/updateAdvertise"
+                body: "*"
+        };
+    }
+
+    rpc DeleteAdvertise(DeleteAdvertiseReq) returns (DeleteAdvertiseResp){
+        option (google.api.http) = {
+                post:"/advertise/deleteAdvertise"
+                body: "*"
+        };
+    }
+}
+
+//TODO need to see how to filter out advertisement according to the brand and vendor specs.
+
+message GetAdd{
+    repeated string genre = 1;
+    repeated string language = 2;
+    repeated string categories = 3;
+}
+message DeleteAdvertiseReq{
+    string brand = 1;
+    string title = 2;
+}
+
+message DeleteAdvertiseResp{
+    bool isSucessfull = 1;
+}
+
+enum AdversiteType {
+    CAROUSEL = 0;  // pageIndex.carouselIndex
+    TILE  = 1;  // pageIndex.rowIndex.tileIndex
+    PRIME = 2;  //custom
+}
+
+message Advertise{
+    google.protobuf.Timestamp  startTime  = 1 ;
+    google.protobuf.Timestamp  endTime = 2 ;
+    string title = 3;
+    string image = 4;
+    string video = 5;
+    Target target = 6;
+    repeated string genre = 7;
+    repeated string language = 8;
+    repeated string categories = 9;
+    string position = 10 ;
+    AdversiteType AdversiteType = 11;
+    float viewCount = 12;
+    float clickCount = 13;
+    google.protobuf.Duration viewDuration = 14;
+    string brand = 15;
+}
+
+message Target{
+    string package = 1;
+    string url = 2;
+}
