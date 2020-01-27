@@ -4,7 +4,7 @@ package AdvertiseService;
 
 import   "google/api/timestamp.proto";
 import   "google/api/annotations.proto";
-import "google/api/duration.proto";
+import   "google/api/duration.proto";
 
 service AdvertiseService{
     //Schedular CRUD

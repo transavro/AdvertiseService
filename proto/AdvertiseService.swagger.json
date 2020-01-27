@@ -1,0 +1,299 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AdvertiseService.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/advertise/createAdvertise": {
+      "post": {
+        "summary": "Schedular CRUD",
+        "operationId": "CreateAdvertise",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AdvertiseServiceAdvertise"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvertiseServiceAdvertise"
+            }
+          }
+        ],
+        "tags": [
+          "AdvertiseService"
+        ]
+      }
+    },
+    "/advertise/deleteAdvertise": {
+      "post": {
+        "operationId": "DeleteAdvertise",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AdvertiseServiceDeleteAdvertiseResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvertiseServiceDeleteAdvertiseReq"
+            }
+          }
+        ],
+        "tags": [
+          "AdvertiseService"
+        ]
+      }
+    },
+    "/advertise/getAdvertise": {
+      "post": {
+        "operationId": "GetAdvertise",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "$ref": "#/x-stream-definitions/AdvertiseServiceAdvertise"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvertiseServiceGetAdd"
+            }
+          }
+        ],
+        "tags": [
+          "AdvertiseService"
+        ]
+      }
+    },
+    "/advertise/updateAdvertise": {
+      "post": {
+        "operationId": "UpdateAdvertise",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AdvertiseServiceAdvertise"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvertiseServiceAdvertise"
+            }
+          }
+        ],
+        "tags": [
+          "AdvertiseService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AdvertiseServiceAdversiteType": {
+      "type": "string",
+      "enum": [
+        "CAROUSEL",
+        "TILE",
+        "PRIME"
+      ],
+      "default": "CAROUSEL"
+    },
+    "AdvertiseServiceAdvertise": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "video": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/definitions/AdvertiseServiceTarget"
+        },
+        "genre": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "language": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "position": {
+          "type": "string"
+        },
+        "AdversiteType": {
+          "$ref": "#/definitions/AdvertiseServiceAdversiteType"
+        },
+        "viewCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "clickCount": {
+          "type": "number",
+          "format": "float"
+        },
+        "viewDuration": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        }
+      }
+    },
+    "AdvertiseServiceDeleteAdvertiseReq": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "AdvertiseServiceDeleteAdvertiseResp": {
+      "type": "object",
+      "properties": {
+        "isSucessfull": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "AdvertiseServiceGetAdd": {
+      "type": "object",
+      "properties": {
+        "genre": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "language": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AdvertiseServiceTarget": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeStreamError": {
+      "type": "object",
+      "properties": {
+        "grpc_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "http_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "http_status": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "x-stream-definitions": {
+    "AdvertiseServiceAdvertise": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/AdvertiseServiceAdvertise"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of AdvertiseServiceAdvertise"
+    }
+  }
+}
